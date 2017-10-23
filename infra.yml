@@ -29,7 +29,7 @@
         name: AAVM01
         vm_size: Standard_A1_v2
         os_type: Windows
-        admin_username: automation-user
+        admin_username: 
         admin_password: 
         image:
           offer: WindowsServer
