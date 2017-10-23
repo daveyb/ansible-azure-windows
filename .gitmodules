@@ -1,0 +1,6 @@
+[submodule "containers/azure-ansible-container"]
+	path = containers/azure-ansible-container
+	url = https://github.com/daveyb/azure-ansible-container.git
+[submodule "containers/azhelper"]
+	path = containers/azhelper
+	url = https://github.com/straubt1/azhelper.git

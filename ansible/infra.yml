@@ -26,7 +26,7 @@
     - name: Create Azure VM01
       azure_rm_virtualmachine:
         resource_group: AnsibleAzure01
-        name: AAVM01
+        name: AnsibleAzureVM01
         vm_size: Standard_A1_v2
         os_type: Windows
         admin_username: 
