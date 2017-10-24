@@ -26,7 +26,7 @@
     - name: Create Azure VM01
       azure_rm_virtualmachine:
         resource_group: AnsibleAzure01
-        name: AnsibleAzureVM01
+        name: AAVM01
         vm_size: Standard_A1_v2
         os_type: Windows
         admin_username: 
@@ -37,3 +37,17 @@
           sku: 2016-Datacenter
           version: latest
         location: eastus
+
+    - name: Enable WinRM for Ansible
+      azure_rm_virtualmachine_extension:
+        name: winrmremoting
+        resource_group: AnsibleAzure01
+        virtual_machine_name: AAVM01
+        publisher: Microsoft.Compute
+        virtual_machine_extension_type: CustomScriptExtension
+        type_handler_version: 1.9
+        settings: '{
+          "fileUris": ["https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"],
+          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1"
+        }'
+        auto_upgrade_minor_version: true
