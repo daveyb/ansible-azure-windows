@@ -1,0 +1,34 @@
+- hosts: demo
+  gather_facts: no
+  tasks:
+
+    - name: Lock java version
+      set_fact: 
+        jre_version: 8.0.144
+
+    - name: Set java bin path
+      set_fact:
+        jre_bin_path: "C:\\Program Files\\Java\\jre1.8.0_144\\bin"
+
+    - name: Ensure jre8 is installed
+      win_chocolatey:
+        name: jre8
+        version: "{{ jre_version }}"
+
+    - name: Ensure javaruntime is installed
+      win_chocolatey:
+        name: javaruntime
+        version: "{{ jre_version }}"
+        ignore_dependencies: yes
+
+    - name: Verify jre bin path
+      win_stat:
+        path: "{{ jre_bin_path }}"
+      register: jre_bin
+
+    - name: Place jre bin into system path
+      win_path:
+        elements:
+          - "{{ jre_bin_path }}"
+        state: present
+      when: jre_bin.stat.exists

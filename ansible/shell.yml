@@ -1,0 +1,20 @@
+- hosts: demo
+  gather_facts: no
+  tasks:
+
+    - name: Check if SMBv1 is disabled
+      win_shell: $(Get-SmbServerConfiguration).EnableSMB1Protocol
+      register: smb1_enabled
+
+    - name: Make sure SMBv1 is disabled
+      win_shell: Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
+      when: smb1_enabled.stdout_lines[0] == "True"
+
+    - name: Find stopped services that have running dependent services
+      win_shell: > # Interprets multiple lines as a single line
+        Get-Service |
+        ?{ $_.Status -eq 'Stopped' } |
+        %{
+          $_.DependentServices |
+          ?{ $_.Status -eq 'Running' }
+        }

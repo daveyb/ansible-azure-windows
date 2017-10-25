@@ -6,4 +6,8 @@ ansible_winrm_scheme=https
 ansible_user=
 ansible_password=
 
-[windows]
+[windows:children]
+demo
+
+[demo]
+# IP of host(s) go here
