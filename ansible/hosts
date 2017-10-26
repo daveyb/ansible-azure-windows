@@ -10,4 +10,3 @@ ansible_password=
 demo
 
 [demo]
-# IP of host(s) go here
