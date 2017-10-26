@@ -1,0 +1,13 @@
+[windows:vars]
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_scheme=https
+ansible_user=myuseraccount
+ansible_password=xxxxxxxxxxxxxxxxx
+
+[windows:children]
+demo
+
+[demo]
+xxx.xxx.xxx.xxx
